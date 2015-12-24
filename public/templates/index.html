@@ -1,0 +1,50 @@
+<br/>
+<div class="row">
+  <div class="col-md-12">
+    <a class="btn btn-primary" href="#/products/new">Create a product</a>
+    <h3 class="block">All Products</h3>
+
+
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+          <input type="text" class="form-control" placeholder="Search product" ng-model="searchProduct">
+        </div>
+      </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>
+          <a href="" ng-click="order('name');">Name</a>
+          <span ng-show="predicate == 'name' && !reverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+          <span ng-show="predicate == 'name' && reverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+        </th>
+        <th>Description</th>
+        <th>
+          <a href="" ng-click="order('price');">Price</a>
+          <span ng-show="predicate == 'price' && !reverse" class="glyphicon glyphicon-sort-by-order"></span>
+          <span ng-show="predicate == 'price' && reverse" class="glyphicon glyphicon-sort-by-order-alt"></span>
+        </th>
+        <th></th>
+      </tr>
+      <tr ng-hide="products.length" >
+          <td colspan="5">No products found, Please create one.</td>
+      </tr>
+      <tr ng-show="products.length" ng-repeat="product in products | orderBy:predicate:reverse | filter:searchProduct" >
+        <td><a href="#/products/{{product.id}}">{{product.name}}</a></td>
+        <td>{{product.description}}</td>
+        <td>{{product.price}}</td>
+        <td>
+            <a href="#/products/{{product.id}}/edit">
+            <span class="glyphicon glyphicon-pencil"></span></a> |
+            <a href="" ng-click="deleteProduct(product.id)">
+            <span class="glyphicon glyphicon-trash"></span></a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
